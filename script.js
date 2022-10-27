@@ -1,3 +1,5 @@
+import localQuotes from './quotes.json' assert { type: 'json' };
+
 const quoteContainer = document.getElementById('quote-container');
 const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
@@ -5,7 +7,7 @@ const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
-let apiQuotes = [];
+// let apiQuotes = [];
 
 // Show Loading
 function loading() {
@@ -22,8 +24,8 @@ function complete() {
 // Show New Quote
 function newQuote() {
     loading();
-    // Pick a random quote from ApiQuotes array
-    const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+    // Pick a random quote from localQuotes array
+    const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
     // Check if Author field is blank and replace it with 'Unknow'
     if (!quote.author) {
         authorText.textContent = 'Unknow'
@@ -42,17 +44,17 @@ function newQuote() {
 }
 
 // Get Quotes From API
-async function getQuote() {
-    loading();
-    const apiUrl = 'http://jacintodesign.github.io/quotes-api/data/quotes.json';
-    try {
-        const response = await fetch(apiUrl);
-        apiQuotes = await response.json();
-        newQuote();
-    } catch (error) {
-        // Catch Error Here
-    } 
-}
+// async function getQuote() {
+//     loading();
+//     const apiUrl = 'https://mocki.io/v1/ec3c329d-d327-458c-ad3c-9670e2a4ef40';
+//     try {
+//         const response = await fetch(apiUrl);
+//         apiQuotes = await response.json();
+//         newQuote();
+//     } catch (error) {
+//         // Catch Error Here
+//     } 
+// }
 
 // Tweet Quote
 function tweetQuote() {
@@ -67,4 +69,5 @@ twitterBtn.addEventListener('click', tweetQuote);
 
 
 // On Load
-getQuote();
+// getQuote();
+newQuote();
